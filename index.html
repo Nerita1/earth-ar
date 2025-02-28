@@ -21,10 +21,11 @@
         }
         model-viewer {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
             width: 100%;
             height: 100%;
+            transform: translate(-50%, -50%);
             background-color: transparent !important;
         }
     </style>
@@ -36,7 +37,8 @@
         src="https://nerita1.github.io/earth-ar/earth.glb"
         camera-controls 
         auto-rotate
-        disable-zoom>
+        min-field-of-view="15"
+        max-field-of-view="45">
     </model-viewer>
 
     <script>
