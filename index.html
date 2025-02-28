@@ -8,21 +8,31 @@
     <style>
         body {
             margin: 0;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             overflow: hidden;
         }
-        model-viewer {
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        model-viewer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
             background-color: transparent !important;
         }
     </style>
 </head>
 <body>
+    <video id="backgroundVideo" autoplay playsinline></video>
+
     <model-viewer 
         src="https://nerita1.github.io/earth-ar/earth.glb"
         camera-controls 
@@ -32,5 +42,19 @@
         min-camera-orbit="auto 0deg 1m"
         max-camera-orbit="auto 0deg 3m">
     </model-viewer>
+
+    <script>
+        async function startCamera() {
+            const video = document.getElementById('backgroundVideo');
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                video.srcObject = stream;
+            } catch (err) {
+                console.error("Kamera tidak bisa diakses:", err);
+                alert("Gagal mengakses kamera. Pastikan izin sudah diberikan dan gunakan browser yang mendukung.");
+            }
+        }
+        startCamera();
+    </script>
 </body>
 </html>
