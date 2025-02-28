@@ -3,19 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Earth 3D Viewer</title>
+    <title>Earth 3D AR</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        model-viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lihat Model 3D Bumi</h1>
+    <video id="backgroundVideo" autoplay playsinline></video>
+    
     <model-viewer 
         src="https://nerita1.github.io/earth-ar/earth.glb"
         camera-controls 
         auto-rotate
-        disable-pan
         disable-zoom
-        camera-orbit="0deg 90deg 100%"
-        style="width: 100%; height: 500px;">
+        style="background-color: transparent;">
     </model-viewer>
+
+    <script>
+        async function startCamera() {
+            const video = document.getElementById('backgroundVideo');
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                video.srcObject = stream;
+            } catch (err) {
+                console.error("Kamera tidak bisa diakses:", err);
+            }
+        }
+        startCamera();
+    </script>
 </body>
 </html>
