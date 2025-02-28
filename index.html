@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Earth AR</title>
+    <title>Earth 3D Viewer</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer"></script>
 </head>
 <body>
+    <h1>Lihat Model 3D Bumi</h1>
     <model-viewer 
         src="https://nerita1.github.io/earth-ar/earth.glb"
-        ar 
-        ar-modes="scene-viewer webxr quick-look"
         camera-controls 
         auto-rotate
-        style="width: 100%; height: 100vh;">
+        disable-pan
+        style="width: 100%; height: 500px;">
     </model-viewer>
 </body>
 </html>
