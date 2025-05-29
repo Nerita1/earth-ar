@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smojo Embed</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       overflow: hidden;
+      background-color: #ffffff;
+    }
+    #holder {
+      width: 100%;
       height: 100%;
     }
     iframe {
@@ -18,9 +24,17 @@
   </style>
 </head>
 <body>
-  <iframe 
-    src="https://app.smojo.org/ai241008107/tanya-aina" 
-    allowfullscreen>
-  </iframe>
+  <div id="holder">Memuat...</div>
+
+  <script>
+    setTimeout(function () {
+      var iframe = document.createElement("iframe");
+      iframe.src = "https://app.smojo.org/ai241008107/tanya-aina";
+      iframe.allow = "geolocation; microphone; camera; autoplay; encrypted-media;";
+      iframe.allowFullscreen = true;
+      document.getElementById("holder").innerHTML = "";
+      document.getElementById("holder").appendChild(iframe);
+    }, 1000); // Delay 1 detik
+  </script>
 </body>
 </html>
